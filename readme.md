@@ -1,7 +1,9 @@
 # **Magnify**
 - Python-Version - python 2.7.9
 - App-version : 0.1
+
 ## **Project Description**
+
 generating reports from rdbms systems(mysql, mssql, etc) is very common in the field of information technology. Often we will just create custom php scripts to get what we want. Magnify looks at the same problem as a framework. In Magnify you can create reports dynamically by passing data at the time of generating reports.
 
 for eg: Suppose there is table 'testdata' and has muliple columns , one of the column is date_field
