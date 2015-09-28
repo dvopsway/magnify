@@ -1,0 +1,48 @@
+{% extends "base_report.html" %}
+
+{% block content %}
+
+<form style="float: left; padding-left: 3.5cm;" action="{% url 'report:get_params' %}" method="post" class="form-inline">
+<br><br>
+  <div class="form-group">
+      {% csrf_token %}
+    {% if request.session.valid_report == "no" %}
+          <p class="alert alert-danger">{{request.session.error_message}}</p>
+    {% endif %}
+      <select class="form-control" name="report_name">
+          {% for sql_statement in sql_statements %}
+      {% if request.session.report_name == sql_statement.query_name and request.session.is_admin == "no" %}
+      <option value="{{ sql_statement }}" selected="selected">{{ sql_statement }}</option>
+          {% elif request.session.report_name == sql_statement and request.session.is_admin == "yes" %}
+          <option value="{{ sql_statement }}" selected="selected">{{ sql_statement }}</option>
+          {% else %}
+          <option value="{{ sql_statement }}">{{ sql_statement }}</option>
+          {% endif %}
+          {% endfor %}
+      </select> &nbsp;
+    <button class="btn btn-default btn-primary" type="submit">Submit</button>
+  </div>
+
+
+    </center>
+</form><br><br><br><br><br><br>
+{% if request.session.param_requierd == "yes" %}
+
+    <form style="float: left; padding-left: 20cm;" action="{% url 'report:load_report' request.session.report_name %}" method="post" class="form-signin">
+        <h3> Additional information required </h3><br>
+        {% csrf_token %}
+        {% if request.session.valid_form == "no" %}
+        <p class="alert alert-danger">{{request.session.error_message}}</p>
+        {% endif %}
+        {% for param in params %}
+        <div class="form-group">
+            <label>{{param.parameter_label}}</label>
+            <div class="col-xs-25">
+            <input class="form-control" name="{{ param.parameter_name }}" type="{{param.parameter_type}}"/></div>
+        </div>
+        {% endfor %}
+        <button  class="btn btn-default btn-primary" type="submit">Load Report</button>
+    </form>
+{% endif %}
+
+{% endblock %}

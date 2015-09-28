@@ -1,0 +1,48 @@
+{% extends "base_report.html" %}
+{% load staticfiles%}
+
+{% block customjs %}
+<script type="text/javascript" src="/static/js/resources/jquery.dataTables.min.js"></script>
+<script src="/static/js/resources/jquery.dataTables.yadcf.js"></script>
+<script>
+$(document).ready(function(){
+  $('#sorter').dataTable().yadcf([
+          {column_number : 0, text_data_delimiter: ",", filter_type: "auto_complete"},
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<center><br><br>
+    <h2 style="float: left; padding-left: 3.5cm;">Report Name : {{ report_name }} </h2>
+	{% if request.session.is_admin == "yes" %}
+    <a href="{% url 'report:csv_generate' %}"><img style="margin-left: 3cm;" src="{% static 'images/csv_export.png' %}" height="42" width="42" /></a>
+	{% endif %}
+	<br><br><br>
+	<div style="float: left; padding-left: 3.5cm;" class="container">
+	  <button  type="button" class="btn btn-info" data-toggle="collapse" data-target="#sql_query">SQL Query</button>&nbsp;
+		<h4 id="sql_query" class="collapse" ><kbd>{{request.session.actual_query}}</kbd></h4>
+	</div>
+	<br><br><br>
+    <div style="width:80% ; height:450px ;  overflow: auto;">
+    <table class="table table-bordered table-hover table-striped" id="sorter">
+        <thead>
+        <tr>
+        {% for title in results_title %}
+            <th>{{ title.0|upper }}</th>
+        {% endfor %}
+        </tr></thead>
+        <tbody>
+        {% for result in queryresult %}
+        <tr>
+    {% for word in result %}
+            <td>{{word}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+        </div>
+</center>
+
+{% endblock %}

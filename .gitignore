@@ -1,0 +1,4 @@
+reporttool/migrations/
+*.pyc
+reporttool/*.pyc
+magnify/*.pyc
