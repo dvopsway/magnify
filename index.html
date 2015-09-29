@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Magnify by dvopsway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Magnify</h1>
+      <h2 class="project-tagline">A django based tool that enables you to generate dynamic reports from relational databases (mysql , mssql).</h2>
+      <a href="https://github.com/dvopsway/magnify" class="btn">View on GitHub</a>
+      <a href="https://github.com/dvopsway/magnify/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/dvopsway/magnify/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="magnify" class="anchor" href="#magnify" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Magnify</strong>
+</h1>
+
+<ul>
+<li>Python-Version - python 2.7.9</li>
+<li>App-version : 0.1</li>
+</ul>
+
+<h2>
+<a id="project-description" class="anchor" href="#project-description" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Project Description</strong>
+</h2>
+
+<p>generating reports from rdbms systems(mysql, mssql, etc) is very common in the field of information technology. Often we will just create custom php scripts to get what we want. Magnify looks at the same problem as a framework. In Magnify you can create reports dynamically by passing data at the time of generating reports.</p>
+
+<p>for eg: Suppose there is table 'testdata' and has muliple columns , one of the column is date_field</p>
+
+<p>Now you usually get data using the query below, where you basically replace the date field everytime you need to generate a report.</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">SELECT</span> <span class="pl-k">*</span><span class="pl-k">FROM</span> <span class="pl-s"><span class="pl-pds">`</span>testdata<span class="pl-pds">`</span></span><span class="pl-k">WHERE</span> (date_field BETWEEN <span class="pl-s"><span class="pl-pds">'</span>2010-01-30<span class="pl-pds">'</span></span> <span class="pl-k">AND</span> <span class="pl-s"><span class="pl-pds">'</span>2010-09-29<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>With magnigy you basically make these date values variable, and tell magnify what type of these two values are, You need to tell magnify that FROM_DATE, TO_DATE are variables of type date. hence when you select a query , you are asked for these variables in an html form , in this case it will be a date picker.</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">SELECT</span> <span class="pl-k">*</span><span class="pl-k">FROM</span> <span class="pl-s"><span class="pl-pds">`</span>testdata<span class="pl-pds">`</span></span><span class="pl-k">WHERE</span> (date_field BETWEEN FROM_DATE <span class="pl-k">AND</span> TO_DATE)</pre></div>
+
+<p>Once you provide that data , your report is generated , now you can export it as csv, pdf, (in future email support will be added), etc.</p>
+
+<h2>
+<a id="reqiurements" class="anchor" href="#reqiurements" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Reqiurements</strong>
+</h2>
+
+<p>first things first , lets get all the dependencies out of the way</p>
+
+<ul>
+<li>
+<p>install freetds (Google up on this , in case you face issues)</p>
+
+<ul>
+<li>
+<p>install on Mac:</p>
+
+<pre><code>   brew install freetds
+</code></pre>
+</li>
+<li>
+<p>install on unix:</p>
+
+<pre><code>   yum install freetds freetds-devel
+</code></pre>
+</li>
+<li>
+<p>install on windows:</p>
+
+<p>download from following link : <a href="http://sourceforge.net/projects/freetdswindows/">Download FreeTDS</a>.</p>
+</li>
+</ul>
+</li>
+<li><p>python packages required</p></li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre>  pip install django
+  pip install mysql<span class="pl-k">-</span>python
+  pip install pymssql
+  pip install reportlab</pre></div>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Setup</strong>
+</h2>
+
+<p>Create a db in mysql setup name it 'magnigy'</p>
+
+<div class="highlight highlight-source-sql"><pre><span class="pl-k">create</span> <span class="pl-k">database</span> <span class="pl-en">magnigy</span></pre></div>
+
+<p>open setting.py and update db connection settings of the database in which you created magnify db</p>
+
+<div class="highlight highlight-source-python"><pre>DATABASES <span class="pl-k">=</span> {
+    <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span>: {
+        <span class="pl-s"><span class="pl-pds">'</span>ENGINE<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>django.db.backends.mysql<span class="pl-pds">'</span></span>,
+        <span class="pl-s"><span class="pl-pds">'</span>NAME<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>magnify<span class="pl-pds">'</span></span>,
+        <span class="pl-s"><span class="pl-pds">'</span>USER<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>username<span class="pl-pds">'</span></span>,
+        <span class="pl-s"><span class="pl-pds">'</span>PASSWORD<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span>,
+        <span class="pl-s"><span class="pl-pds">'</span>HOST<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>localhost<span class="pl-pds">'</span></span>,   <span class="pl-c"># Or an IP Address that your DB is hosted on</span>
+        <span class="pl-s"><span class="pl-pds">'</span>PORT<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>3306<span class="pl-pds">'</span></span>,
+        }
+}</pre></div>
+
+<p>When done with this you need to run below to generate schema for project</p>
+
+<div class="highlight highlight-source-python"><pre>python manage.py schemamigration reporttool</pre></div>
+
+<p>Now run syncdb on django app to create actual tables, create an admin account too.</p>
+
+<div class="highlight highlight-source-python"><pre>python manage.py syncdb</pre></div>
+
+<p>Now try running the app using</p>
+
+<div class="highlight highlight-source-python"><pre>python manage.py runserver <span class="pl-c1">0.0</span>.<span class="pl-c1">0.0</span>:<span class="pl-c1">8000</span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/dvopsway/magnify">Magnify</a> is maintained by <a href="https://github.com/dvopsway">dvopsway</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
