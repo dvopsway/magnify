@@ -53,9 +53,9 @@ first things first , lets get all the dependencies out of the way
 
 ## **Setup**
 
-Create a db in mysql setup name it 'magnigy'
+Create a db in mysql setup name it 'magnify'
 ```sql
-create database magnigy
+create database magnify
 ```
 
 open setting.py and update db connection settings of the database in which you created magnify db
