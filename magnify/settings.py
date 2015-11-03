@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'magnify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mmt_bi',
+        'NAME': 'magnify',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
