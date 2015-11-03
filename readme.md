@@ -49,6 +49,7 @@ first things first , lets get all the dependencies out of the way
   pip install mysql-python
   pip install pymssql
   pip install reportlab
+  pip install django-grappelli
 ```
 
 ## **Setup**
