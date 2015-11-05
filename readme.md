@@ -1,6 +1,7 @@
 # **Magnify**
 - Python-Version - python 2.7.9
 - App-version : 0.1
+- Docker Page : https://hub.docker.com/r/padmakarojha/magnify/
 
 ## **Project Description**
 
