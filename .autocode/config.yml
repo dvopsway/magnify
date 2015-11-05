@@ -1,0 +1,7 @@
+name: dvopsway/magnify
+author:
+  name: Padmakar Ojha
+  email: padmakarojha@gmail.com
+  url: 'https://in.linkedin.com/in/dvopsway'
+copyright: 2015 Padmakar Ojha
+description: 'A django based tool that enables you to generate dynamic reports from relational databases (mysql , mssql).'
