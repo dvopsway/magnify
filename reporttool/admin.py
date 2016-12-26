@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import sql_statement ,custom_parameter
+from .models import sql_statement, custom_parameter
+
 
 class sql_statement_model(admin.ModelAdmin):
-    list_display = ('query_name', 'database_name', 'database_server', 'database_type')
+    list_display = ('query_name', 'database_name',
+                    'database_server', 'database_type')
     #form = sql_statement_form
+
 
 class custom_parameter_model(admin.ModelAdmin):
     list_display = ('parameter_name', 'parameter_label', 'parameter_type')

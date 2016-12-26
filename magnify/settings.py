@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'magnify.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR , 'templates/' ),
+    os.path.join(BASE_DIR, 'templates/'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -92,9 +92,8 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
-        }
+    }
 }
-
 
 
 # Internationalization
@@ -112,14 +111,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR ,'static','static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-        os.path.join(BASE_DIR ,'static','static_dirs'),
-    ]
+    os.path.join(BASE_DIR, 'static', 'static_dirs'),
+]
 
 MEDIA_ROOT = '/media/'
 
-MEDIA_URL = os.path.join(BASE_DIR ,'static','media/')
+MEDIA_URL = os.path.join(BASE_DIR, 'static', 'media/')
